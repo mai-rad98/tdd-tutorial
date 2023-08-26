@@ -21,10 +21,10 @@ const TodoItem = ({ todo, removeHandler, updateTodo }) => (
     </div>
     <button
       className={styles.closeBtn}
-      data-testId={`close-btn-${todo.id}`}
+      data-testid={`close-btn-${todo.id}`}
       onClick={() => removeHandler(todo.id)}
     >
-      X
+      
     </button>
   </div>
 );

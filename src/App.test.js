@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { fireEvent, render, screen,waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import App from './App';
 import fetchMock from 'jest-fetch-mock';
 import mockData from './mockData';
@@ -36,10 +36,25 @@ describe('<App /> tests', () => {
 
   it('should remove todo from list', async() => {
     render(<App />);
-    await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
-    userEvent.click(screen.getByTestId('close-btn-4'));
-    const title = screen.queryByText(/write a blog post/i);
-    expect(title).not.toBeInTheDocument();
+    // await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
+    
+    // userEvent.click(screen.getByTestId('close-btn-4'));
+    // const title = screen.queryByText(/write a blog post/i);
+    // expect(title).not.toBeInTheDocument();
+
+    // Wait for the loading indicator to disappear
+  await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
+  
+  // Find the close button for the specific todo item and click it
+  const closeBtn = screen.getByTestId('close-btn-4');
+
+  userEvent.click(closeBtn);
+  await waitFor(() => expect(screen.queryByTestId('close-btn-4')).not.toBeInTheDocument());
+
+  
+  // Check if the title of the todo item is no longer in the document
+  const title = screen.queryByText(/write a blog post/i);
+  expect(title).not.toBeInTheDocument();
   })
 
   it('todo item should be crossed out after completion', async () => {
