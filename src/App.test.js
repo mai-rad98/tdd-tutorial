@@ -36,11 +36,7 @@ describe('<App /> tests', () => {
 
   it('should remove todo from list', async() => {
     render(<App />);
-    // await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
-    
-    // userEvent.click(screen.getByTestId('close-btn-4'));
-    // const title = screen.queryByText(/write a blog post/i);
-    // expect(title).not.toBeInTheDocument();
+   
 
     // Wait for the loading indicator to disappear
   await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
